@@ -76,7 +76,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         enhancerChain.setTokenEnhancers(delegates); // 配置JWT的内容增强器
         endpoints.authenticationManager(authenticationManager)
                 .tokenGranter(tokenGranter(endpoints))
-                .userDetailsService(userDetailsService) // 配置加载用户信息的服务
+//                .userDetailsService(userDetailsService) // 配置加载用户信息的服务
                 .accessTokenConverter(accessTokenConverter())
                 .tokenEnhancer(enhancerChain);
     }
