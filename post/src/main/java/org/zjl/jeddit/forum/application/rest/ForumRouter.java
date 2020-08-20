@@ -19,8 +19,8 @@ public class ForumRouter {
     @Bean
     public RouterFunction<ServerResponse> commandRoute(ForumCommandHandler commandHandler) {
         return RouterFunctions
-                .route(RequestPredicates.POST("/").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), commandHandler::createTopic)
-                .andRoute(RequestPredicates.PUT("/{id}").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), commandHandler::updateTopic);
+                .route(RequestPredicates.POST("/").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), commandHandler::createPost)
+                .andRoute(RequestPredicates.PUT("/{id}").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), commandHandler::updatePost);
     }
 
     @Bean
