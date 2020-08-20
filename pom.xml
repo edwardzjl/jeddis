@@ -19,8 +19,9 @@
 
     <modules>
         <module>user</module>
-        <module>forum</module>
+        <module>post</module>
         <module>auth</module>
+        <module>message</module>
     </modules>
 
     <properties>

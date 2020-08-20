@@ -11,7 +11,7 @@ import java.util.Optional;
  * @author Junlin Zhou
  */
 @Repository
-public interface SecurityUserRepository extends JpaRepository<SecurityUserEntity, Long>, JpaSpecificationExecutor<SecurityUserEntity> {
+public interface SecurityUserJpaRepository extends JpaRepository<SecurityUserEntity, Long>, JpaSpecificationExecutor<SecurityUserEntity> {
 
     default Optional<SecurityUserEntity> findByUsername(String username) {
         Specification<SecurityUserEntity> spec = (Specification<SecurityUserEntity>) (root, criteriaQuery, criteriaBuilder) ->

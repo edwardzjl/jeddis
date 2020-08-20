@@ -13,7 +13,9 @@ import org.zjl.jeddit.auth.infrustructure.repository.jpa.SecurityUserEntity;
 public interface SecurityUserMapper {
 
 
-    SecurityUser entityToModel(SecurityUserEntity entity);
+    SecurityUser jpaEntityToModel(SecurityUserEntity entity);
+
+    SecurityUser mongoEntityToModel(org.zjl.jeddit.auth.infrustructure.repository.mongo.SecurityUser entity);
 
     default Username usernameConverter(String username) {
         return Username.construct(username);

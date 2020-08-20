@@ -1,35 +1,34 @@
 package org.zjl.jeddit.auth.domain;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.zjl.jeddit.auth.domain.aggregates.SecurityUser;
 import org.zjl.jeddit.auth.infrustructure.mapper.SecurityUserMapper;
-import org.zjl.jeddit.auth.infrustructure.repository.jpa.SecurityUserRepository;
+import org.zjl.jeddit.auth.infrustructure.repository.mongo.SecurityUserMongoRepository;
+import reactor.core.publisher.Mono;
 
 /**
  * @author Junlin Zhou
  */
 @Service
-public class SecurityUserService implements UserDetailsService {
+public class SecurityUserService implements ReactiveUserDetailsService {
 
-    private final SecurityUserRepository securityUserRepo;
+    private final SecurityUserMongoRepository userRepo;
     private final SecurityUserMapper mapper;
 
-    public SecurityUserService(SecurityUserRepository securityUserRepo, SecurityUserMapper mapper) {
-        this.securityUserRepo = securityUserRepo;
+    public SecurityUserService(SecurityUserMongoRepository userRepo, SecurityUserMapper mapper) {
+        this.userRepo = userRepo;
         this.mapper = mapper;
     }
-
 
     /**
      * @param username openId from wechat
      */
-    @Override
-    public SecurityUser loadUserByUsername(String username) throws UsernameNotFoundException {
-        return securityUserRepo.findByUsername(username)
-                .map(mapper::entityToModel)
-                .orElseThrow(() -> new UsernameNotFoundException("No such user for name: " + username));
+//    @Override
+//    public SecurityUser loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return securityUserRepo.findByUsername(username)
+//                .map(mapper::entityToModel)
+//                .orElseThrow(() -> new UsernameNotFoundException("No such user for name: " + username));
 //        if (!securityUser.isEnabled()) {
 //            throw new DisabledException(MessageConstant.ACCOUNT_DISABLED);
 //        } else if (!securityUser.isAccountNonLocked()) {
@@ -39,6 +38,10 @@ public class SecurityUserService implements UserDetailsService {
 //        } else if (!securityUser.isCredentialsNonExpired()) {
 //            throw new CredentialsExpiredException(MessageConstant.CREDENTIALS_EXPIRED);
 //        }
+//    }
+    @Override
+    public Mono<UserDetails> findByUsername(String username) {
+        return userRepo.findByUsername(username)
+                .map(mapper::mongoEntityToModel);
     }
-
 }

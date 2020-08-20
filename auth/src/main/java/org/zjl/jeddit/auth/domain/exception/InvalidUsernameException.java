@@ -3,6 +3,7 @@ package org.zjl.jeddit.auth.domain.exception;
 /**
  * @author Junlin Zhou
  */
+// TODO: 2020/8/19 zjl choose a better base class
 public class InvalidUsernameException extends RuntimeException{
 
     public InvalidUsernameException() {
