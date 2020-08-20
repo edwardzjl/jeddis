@@ -25,7 +25,7 @@ public class ForumCommandHandler {
         Mono<Post> post = request.bodyToMono(Post.class);
         return post.log()
                 .map(postRepo::save)
-                .flatMap(ignore -> ServerResponse.ok()
+                .then(ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)
                         .body(BodyInserters.fromValue("creating topic")));
     }
@@ -36,7 +36,7 @@ public class ForumCommandHandler {
         return postRepo.findById(postId)
                 .log()
                 .zipWith(newPost, postMapper::update)
-                .flatMap(ignore -> ServerResponse.ok()
+                .then(ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)
                         .body(BodyInserters.fromValue("updating topic: " + postId)));
     }

@@ -19,14 +19,22 @@ public class ForumRouter {
     @Bean
     public RouterFunction<ServerResponse> commandRoute(ForumCommandHandler commandHandler) {
         return RouterFunctions
-                .route(RequestPredicates.POST("/").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), commandHandler::createPost)
-                .andRoute(RequestPredicates.PUT("/{id}").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), commandHandler::updatePost);
+                .route(RequestPredicates
+                        .POST("/")
+                        .and(RequestPredicates.accept(MediaType.APPLICATION_STREAM_JSON)), commandHandler::createPost)
+                .andRoute(RequestPredicates
+                        .PUT("/{id}")
+                        .and(RequestPredicates.accept(MediaType.APPLICATION_STREAM_JSON)), commandHandler::updatePost);
     }
 
     @Bean
     public RouterFunction<ServerResponse> queryRoute(ForumQueryHandler queryHandler) {
         return RouterFunctions
-                .route(RequestPredicates.GET("/").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), queryHandler::getTopics)
-                .andRoute(RequestPredicates.GET("/{id}").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), queryHandler::getTopic);
+                .route(RequestPredicates
+                        .GET("/")
+                        .and(RequestPredicates.accept(MediaType.APPLICATION_STREAM_JSON)), queryHandler::getTopics)
+                .andRoute(RequestPredicates
+                        .GET("/{id}")
+                        .and(RequestPredicates.accept(MediaType.APPLICATION_STREAM_JSON)), queryHandler::getTopic);
     }
 }
