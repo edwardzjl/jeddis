@@ -1,29 +1,34 @@
 package org.zjl.jeddit.forum.application;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
-import reactor.core.publisher.Flux;
+import org.zjl.jeddit.forum.domain.model.aggregates.PostRepository;
 import reactor.core.publisher.Mono;
 
 /**
  * @author Junlin Zhou
  */
 @Component
+@AllArgsConstructor
 public class ForumQueryHandler {
 
+    private final PostRepository postRepo;
+
     public Mono<ServerResponse> getTopics(ServerRequest request) {
-        Flux<Post> topics;
-        return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromValue("get all topics"));
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_STREAM_JSON)
+                .body(postRepo.findAll(), Post.class);
     }
 
     public Mono<ServerResponse> getTopic(ServerRequest request) {
-        int topicId = Integer.parseInt(request.pathVariable("id"));
-        return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromValue("get topic: " + topicId));
+        return postRepo.findById(request.pathVariable("id"))
+                .flatMap(p -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_STREAM_JSON)
+                        .body(BodyInserters.fromValue(p)));
     }
 }

@@ -1,6 +1,7 @@
 package org.zjl.jeddit.forum.infrustructure.repository.mongo;
 
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -24,7 +25,6 @@ public class Post {
 
     private String authorId;
 
-    //    private String replyToId;
     private Post replyTo;
 
     private String title;
@@ -40,6 +40,7 @@ public class Post {
     @LastModifiedDate
     private Date updateTime;
 
+//    @Setter(AccessLevel.NONE)
     @Version
     private Long version;
 
