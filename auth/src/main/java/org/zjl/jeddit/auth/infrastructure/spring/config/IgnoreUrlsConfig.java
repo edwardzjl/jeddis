@@ -1,4 +1,4 @@
-package org.zjl.jeddit.auth.infrustructure.spring.config;
+package org.zjl.jeddit.auth.infrastructure.spring.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

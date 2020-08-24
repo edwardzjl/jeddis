@@ -1,4 +1,4 @@
-package org.zjl.jeddit.auth.infrustructure.spring.config;
+package org.zjl.jeddit.auth.infrastructure.spring.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

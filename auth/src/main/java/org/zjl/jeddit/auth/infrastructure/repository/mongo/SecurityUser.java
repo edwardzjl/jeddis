@@ -1,4 +1,4 @@
-package org.zjl.jeddit.auth.infrustructure.repository.mongo;
+package org.zjl.jeddit.auth.infrastructure.repository.mongo;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

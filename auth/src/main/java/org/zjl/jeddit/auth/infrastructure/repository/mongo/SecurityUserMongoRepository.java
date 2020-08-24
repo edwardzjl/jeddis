@@ -1,4 +1,4 @@
-package org.zjl.jeddit.auth.infrustructure.repository.mongo;
+package org.zjl.jeddit.auth.infrastructure.repository.mongo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Mono;

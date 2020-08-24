@@ -1,8 +1,4 @@
-package org.zjl.jeddit.auth.infrustructure.spring.config;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.filter.CommonsRequestLoggingFilter;
+package org.zjl.jeddit.auth.infrastructure.spring.config;
 
 /**
  * @author Junlin Zhou

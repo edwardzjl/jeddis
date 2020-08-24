@@ -1,4 +1,4 @@
-package org.zjl.jeddit.auth.infrustructure.spring.config;
+package org.zjl.jeddit.auth.infrastructure.spring.config;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
