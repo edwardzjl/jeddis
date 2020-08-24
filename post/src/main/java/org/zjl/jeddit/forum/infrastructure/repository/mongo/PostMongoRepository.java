@@ -1,4 +1,4 @@
-package org.zjl.jeddit.forum.infrustructure.repository.mongo;
+package org.zjl.jeddit.forum.infrastructure.repository.mongo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 

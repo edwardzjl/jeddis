@@ -1,4 +1,4 @@
-package org.zjl.jeddit.forum.infrustructure.spring.config;
+package org.zjl.jeddit.forum.infrastructure.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

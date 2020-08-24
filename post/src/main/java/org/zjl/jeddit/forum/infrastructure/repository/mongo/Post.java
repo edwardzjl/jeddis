@@ -1,7 +1,6 @@
-package org.zjl.jeddit.forum.infrustructure.repository.mongo;
+package org.zjl.jeddit.forum.infrastructure.repository.mongo;
 
 import lombok.*;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;

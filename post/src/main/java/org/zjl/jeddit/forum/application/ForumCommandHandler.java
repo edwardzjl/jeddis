@@ -7,7 +7,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
 import org.zjl.jeddit.forum.domain.model.aggregates.PostRepository;
-import org.zjl.jeddit.forum.infrustructure.mapper.PostMapper;
+import org.zjl.jeddit.forum.infrastructure.mapper.PostMapper;
 import reactor.core.publisher.Mono;
 
 /**

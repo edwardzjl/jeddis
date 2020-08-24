@@ -2,8 +2,8 @@ package org.zjl.jeddit.forum.domain.model.aggregates;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.zjl.jeddit.forum.infrustructure.mapper.PostMapper;
-import org.zjl.jeddit.forum.infrustructure.repository.mongo.PostMongoRepository;
+import org.zjl.jeddit.forum.infrastructure.mapper.PostMapper;
+import org.zjl.jeddit.forum.infrastructure.repository.mongo.PostMongoRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -19,7 +19,7 @@ public class PostRepository {
 
 
     public Mono<Post> save(Post entity) {
-        org.zjl.jeddit.forum.infrustructure.repository.mongo.Post mongoEntity = postMapper.modelToMongoEntity(entity);
+        org.zjl.jeddit.forum.infrastructure.repository.mongo.Post mongoEntity = postMapper.modelToMongoEntity(entity);
         return postRepo.save(mongoEntity)
                 .log()
                 .map(postMapper::mongoEntityToModel);

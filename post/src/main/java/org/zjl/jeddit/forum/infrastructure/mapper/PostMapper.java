@@ -1,4 +1,4 @@
-package org.zjl.jeddit.forum.infrustructure.mapper;
+package org.zjl.jeddit.forum.infrastructure.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,12 +13,12 @@ import reactor.core.publisher.Flux;
 @Mapper(componentModel = "spring")
 public interface PostMapper {
 
-    Post mongoEntityToModel(org.zjl.jeddit.forum.infrustructure.repository.mongo.Post entity);
+    Post mongoEntityToModel(org.zjl.jeddit.forum.infrastructure.repository.mongo.Post entity);
 
     @Mappings({
             @Mapping(target = "authorId", source = "model.author.id")
     })
-    org.zjl.jeddit.forum.infrustructure.repository.mongo.Post modelToMongoEntity(Post model);
+    org.zjl.jeddit.forum.infrastructure.repository.mongo.Post modelToMongoEntity(Post model);
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
@@ -26,11 +26,11 @@ public interface PostMapper {
     })
     Post update(Post source, @MappingTarget Post target);
 
-    default Flux<Post> mongoEntityToModel(Flux<org.zjl.jeddit.forum.infrustructure.repository.mongo.Post> flux) {
+    default Flux<Post> mongoEntityToModel(Flux<org.zjl.jeddit.forum.infrastructure.repository.mongo.Post> flux) {
         return flux.map(this::mongoEntityToModel);
     }
 
-    default Flux<org.zjl.jeddit.forum.infrustructure.repository.mongo.Post> modelToMongoEntity(Flux<Post> flux) {
+    default Flux<org.zjl.jeddit.forum.infrastructure.repository.mongo.Post> modelToMongoEntity(Flux<Post> flux) {
         return flux.map(this::modelToMongoEntity);
     }
 
