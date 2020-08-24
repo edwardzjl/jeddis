@@ -2,7 +2,7 @@ package org.zjl.jeddit.user.domain.model.valueobjects;
 
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import org.zjl.jeddit.user.domain.exceptions.InvalidPhoneException;
+import org.zjl.jeddit.user.domain.exceptions.InvalidIdCardException;
 
 /**
  * @author Junlin Zhou
@@ -22,10 +22,10 @@ public class IdCard {
 
     public static IdCard construct(String number) {
         if (number == null) {
-            throw new InvalidPhoneException();
+            throw new InvalidIdCardException();
         }
         if (!isValid(number)) {
-            throw new InvalidPhoneException();
+            throw new InvalidIdCardException();
         }
         return new IdCard(number);
     }
