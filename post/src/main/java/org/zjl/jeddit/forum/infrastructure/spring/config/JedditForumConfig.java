@@ -12,9 +12,9 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
  * @author Junlin Zhou
  */
 @EnableMongoAuditing
-@EnableReactiveMongoRepositories
+@EnableReactiveMongoRepositories(basePackages = "org.zjl.jeddit.forum.infrastructure.repository.mongo")
 @Configuration
-public class JeddisForumConfig {
+public class JedditForumConfig {
 
     @Bean
     CorsWebFilter corsFilter() {
