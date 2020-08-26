@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import org.zjl.jeddit.forum.application.commands.CreatePostCommand;
+import org.zjl.jeddit.forum.application.commands.UpdatePostCommand;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
 import org.zjl.jeddit.forum.domain.model.aggregates.PostRepository;
 import org.zjl.jeddit.forum.infrastructure.mapper.PostMapper;
@@ -21,8 +23,9 @@ public class ForumCommandHandler {
     private final PostMapper postMapper;
 
     public Mono<ServerResponse> createPost(ServerRequest request) {
-        return request.bodyToMono(Post.class)
+        return request.bodyToMono(CreatePostCommand.class)
                 .log()
+                .map(postMapper::create)
                 .map(postRepo::save)
                 .flatMap(post -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)
@@ -30,7 +33,7 @@ public class ForumCommandHandler {
     }
 
     public Mono<ServerResponse> updatePost(ServerRequest request) {
-        return request.bodyToMono(Post.class)
+        return request.bodyToMono(UpdatePostCommand.class)
                 .log()
                 .zipWith(
                         postRepo.findById(request.pathVariable("id")),

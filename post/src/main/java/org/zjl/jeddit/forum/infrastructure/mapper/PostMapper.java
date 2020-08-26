@@ -4,14 +4,22 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
+import org.zjl.jeddit.forum.application.commands.CreatePostCommand;
+import org.zjl.jeddit.forum.application.commands.UpdatePostCommand;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
-import reactor.core.publisher.Flux;
 
 /**
  * @author Junlin Zhou
  */
 @Mapper(componentModel = "spring")
 public interface PostMapper {
+
+    Post create(CreatePostCommand command);
+
+    @Mappings({
+            @Mapping(target = "id", ignore = true)
+    })
+    Post update(UpdatePostCommand command, @MappingTarget Post target);
 
     Post mongoEntityToModel(org.zjl.jeddit.forum.infrastructure.repository.mongo.Post entity);
 
@@ -21,17 +29,9 @@ public interface PostMapper {
     org.zjl.jeddit.forum.infrastructure.repository.mongo.Post modelToMongoEntity(Post model);
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
-            @Mapping(target = "version", ignore = true)
+            @Mapping(target = "id", ignore = true)
+//            @Mapping(target = "version", ignore = true)
     })
     Post update(Post source, @MappingTarget Post target);
-
-    default Flux<Post> mongoEntityToModel(Flux<org.zjl.jeddit.forum.infrastructure.repository.mongo.Post> flux) {
-        return flux.map(this::mongoEntityToModel);
-    }
-
-    default Flux<org.zjl.jeddit.forum.infrastructure.repository.mongo.Post> modelToMongoEntity(Flux<Post> flux) {
-        return flux.map(this::modelToMongoEntity);
-    }
 
 }
