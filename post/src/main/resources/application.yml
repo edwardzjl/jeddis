@@ -1,11 +1,15 @@
 spring:
   data:
     mongodb:
-#      uri: mongodb://easewise:easewise@192.168.2.100:27017/easewise?authSource=easewise&ssl=false
       host: localhost
       port: 27017
       database: jeddit_test
+#  r2dbc:
+#    url: r2dbc:postgresql://192.168.2.100/test
+#    username: postgres
+#    password: mzh888888
+#    initialization-mode: always
 
-#logging:
-#  level:
-#    root: DEBUG
+logging:
+  level:
+    web: debug
