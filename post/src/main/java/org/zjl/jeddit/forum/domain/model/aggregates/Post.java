@@ -31,10 +31,4 @@ public class Post {
     @JsonProperty
     private String content;
 
-    /**
-     * need it for updating mongo document.
-     * If not present, {@link PersistentEntityIsNewStrategy#isNew} will treat this as a new entity,
-     * and {@code repository#save} will throw duplicate key exception.
-     */
-    private Long version;
 }
