@@ -29,6 +29,7 @@ public class ForumQueryHandler {
         return postRepo.findById(request.pathVariable("id"))
                 .flatMap(p -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)
-                        .body(BodyInserters.fromValue(p)));
+                        .body(BodyInserters.fromValue(p)))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 }
