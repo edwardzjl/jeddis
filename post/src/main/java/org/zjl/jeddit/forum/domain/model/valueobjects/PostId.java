@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import org.springframework.data.annotation.Id;
 
 /**
  * We are using both postg and mongo in the same project,
@@ -14,8 +13,6 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor(staticName = "of")
 public class PostId {
 
-    // TODO: 2020/8/28 zjl figure out why here must be an Id annotation
-    @Id
     Object value;
 
     @JsonIgnore
