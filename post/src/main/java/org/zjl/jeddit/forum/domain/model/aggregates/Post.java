@@ -1,6 +1,5 @@
 package org.zjl.jeddit.forum.domain.model.aggregates;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.zjl.jeddit.forum.domain.model.valueobjects.PostId;
 import org.zjl.jeddit.forum.domain.model.valueobjects.User;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Junlin Zhou
@@ -17,6 +18,10 @@ import org.zjl.jeddit.forum.domain.model.valueobjects.User;
 @AllArgsConstructor
 public class Post {
 
+    /**
+     * Nullable when creating
+     */
+    @Nullable
     @Id
     @JsonProperty
     private PostId id;
@@ -24,6 +29,7 @@ public class Post {
     @JsonProperty
     private User author;
 
+    @Nullable
     @JsonProperty
     private org.zjl.jeddit.forum.domain.model.valueobjects.Post replyTo;
 
