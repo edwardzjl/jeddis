@@ -19,14 +19,28 @@ public class ForumQueryHandler {
 
     private final PostRepository postRepo;
 
-    public Mono<ServerResponse> getTopics(ServerRequest request) {
+    public Mono<ServerResponse> getTopicsOnMongo(ServerRequest request) {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_STREAM_JSON)
-                .body(postRepo.findAll(), Post.class);
+                .body(postRepo.findAllInMongo(), Post.class);
     }
 
-    public Mono<ServerResponse> getTopic(ServerRequest request) {
-        return postRepo.findById(request.pathVariable("id"))
+    public Mono<ServerResponse> getTopicsOnPostg(ServerRequest request) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_STREAM_JSON)
+                .body(postRepo.findAllInPostg(), Post.class);
+    }
+
+    public Mono<ServerResponse> getTopicOnMongo(ServerRequest request) {
+        return postRepo.findByIdOnMongo(request.pathVariable("id"))
+                .flatMap(p -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_STREAM_JSON)
+                        .body(BodyInserters.fromValue(p)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getTopicOnPostg(ServerRequest request) {
+        return postRepo.findByIdOnPostg(Long.valueOf(request.pathVariable("id")))
                 .flatMap(p -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)
                         .body(BodyInserters.fromValue(p)))

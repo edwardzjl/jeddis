@@ -16,6 +16,8 @@ public interface PostMapper {
 
     Post create(CreatePostCommand command);
 
+    Post update(UpdatePostCommand command);
+
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
@@ -23,15 +25,16 @@ public interface PostMapper {
 
     Post mongoEntityToModel(org.zjl.jeddit.forum.infrastructure.repository.mongo.Post entity);
 
-    @Mappings({
-            @Mapping(target = "authorId", source = "model.author.id")
-    })
+    //    @Mappings({
+//            @Mapping(target = "authorId", source = "model.author.id")
+//    })
     org.zjl.jeddit.forum.infrastructure.repository.mongo.Post modelToMongoEntity(Post model);
 
-    @Mappings({
-            @Mapping(target = "id", ignore = true)
-//            @Mapping(target = "version", ignore = true)
-    })
-    Post update(Post source, @MappingTarget Post target);
 
+    default String idConverter(Object id) {
+        if (id == null) {
+            return null;
+        }
+        return id.toString();
+    }
 }
