@@ -7,6 +7,7 @@ import org.mapstruct.Mappings;
 import org.zjl.jeddit.forum.application.commands.CreatePostCommand;
 import org.zjl.jeddit.forum.application.commands.UpdatePostCommand;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
+import org.zjl.jeddit.forum.domain.model.valueobjects.PostId;
 
 /**
  * @author Junlin Zhou
@@ -16,6 +17,10 @@ public interface PostMapper {
 
     Post create(CreatePostCommand command);
 
+    /**
+     * Not a real update, but create a new Post from the command.
+     * because updating one requires fetch from db first.
+     */
     Post update(UpdatePostCommand command);
 
     @Mappings({
@@ -25,16 +30,19 @@ public interface PostMapper {
 
     Post mongoEntityToModel(org.zjl.jeddit.forum.infrastructure.repository.mongo.Post entity);
 
-    //    @Mappings({
-//            @Mapping(target = "authorId", source = "model.author.id")
-//    })
     org.zjl.jeddit.forum.infrastructure.repository.mongo.Post modelToMongoEntity(Post model);
 
-
-    default String idConverter(Object id) {
-        if (id == null) {
+    default PostId toModelId(String entityId) {
+        if (entityId == null) {
             return null;
         }
-        return id.toString();
+        return PostId.of(entityId);
+    }
+
+    default String toEntityId(PostId modelId) {
+        if (modelId == null) {
+            return null;
+        }
+        return modelId.getStringId();
     }
 }

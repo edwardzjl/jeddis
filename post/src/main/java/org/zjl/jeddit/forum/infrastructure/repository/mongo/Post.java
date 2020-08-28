@@ -5,6 +5,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.zjl.jeddit.forum.domain.model.valueobjects.User;
 
 import java.util.Date;
 
@@ -21,9 +22,9 @@ public class Post {
     @Id
     private String id;
 
-    private String authorId;
+    private User author;
 
-    private Post replyTo;
+    private org.zjl.jeddit.forum.domain.model.valueobjects.Post replyTo;
 
     private String title;
 

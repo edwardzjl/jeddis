@@ -3,6 +3,7 @@ package org.zjl.jeddit.forum.domain.model.aggregates;
 import lombok.AllArgsConstructor;
 import org.springframework.data.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Component;
+import org.zjl.jeddit.forum.domain.model.valueobjects.PostId;
 import org.zjl.jeddit.forum.infrastructure.mapper.PostMapper;
 import org.zjl.jeddit.forum.infrastructure.repository.mongo.PostMongoRepository;
 import reactor.core.publisher.Flux;
@@ -42,7 +43,7 @@ public class PostRepository {
     }
 
     public Mono<Integer> updateOnPostg(Long id, Post entity) {
-        entity.setId(id);
+        entity.setId(PostId.of(id));
         return databaseClient.update()
                 .table(Post.class)
                 .using(entity)

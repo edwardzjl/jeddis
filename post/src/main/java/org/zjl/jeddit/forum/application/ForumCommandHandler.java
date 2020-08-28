@@ -34,7 +34,7 @@ public class ForumCommandHandler {
                 .flatMap(post -> {
                     URI location = UriComponentsBuilder
                             .fromUri(request.uri())
-                            .pathSegment(post.getId().toString())
+                            .pathSegment(post.getId().getStringId())
                             .build()
                             .toUri();
                     return ServerResponse.created(location)

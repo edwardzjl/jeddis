@@ -10,6 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
+import org.zjl.jeddit.forum.infrastructure.spring.converter.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.r2dbc.spi.ConnectionFactoryOptions.*;
 
@@ -54,6 +58,17 @@ public class R2dbcConfig extends AbstractR2dbcConfiguration {
                 .option(DATABASE, database) // optional
                 .build();
         return ConnectionFactories.get(options);
+    }
+
+    @Override
+    protected List<Object> getCustomConverters() {
+        List<Object> converterList = new ArrayList<>();
+        converterList.add(new UserConverter());
+        converterList.add(new PostConverter());
+        converterList.add(new PostReverseConverter());
+        converterList.add(new PostIdConverter());
+        converterList.add(new PostIdReverseConverter());
+        return converterList;
     }
 
 }
