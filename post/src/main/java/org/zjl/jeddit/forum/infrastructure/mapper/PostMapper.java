@@ -17,12 +17,6 @@ public interface PostMapper {
 
     Post create(CreatePostCommand command);
 
-    /**
-     * Not a real update, but create a new Post from the command.
-     * because updating one requires fetch from db first.
-     */
-    Post update(UpdatePostCommand command);
-
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })

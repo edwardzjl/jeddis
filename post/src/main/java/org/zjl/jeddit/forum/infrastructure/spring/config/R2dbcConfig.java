@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
-import org.zjl.jeddit.forum.infrastructure.spring.converter.*;
+import org.zjl.jeddit.forum.infrastructure.spring.converter.PostReadConverter;
+import org.zjl.jeddit.forum.infrastructure.spring.converter.PostWriteConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,11 +64,8 @@ public class R2dbcConfig extends AbstractR2dbcConfiguration {
     @Override
     protected List<Object> getCustomConverters() {
         List<Object> converterList = new ArrayList<>();
-        converterList.add(new UserConverter());
-        converterList.add(new PostConverter());
-        converterList.add(new PostReverseConverter());
-        converterList.add(new PostIdConverter());
-        converterList.add(new PostIdReverseConverter());
+        converterList.add(new PostReadConverter());
+        converterList.add(new PostWriteConverter());
         return converterList;
     }
 

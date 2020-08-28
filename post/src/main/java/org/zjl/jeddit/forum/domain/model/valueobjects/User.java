@@ -14,7 +14,7 @@ import org.springframework.data.annotation.Id;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 
