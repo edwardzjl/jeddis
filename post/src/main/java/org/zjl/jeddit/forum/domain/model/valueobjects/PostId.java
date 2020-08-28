@@ -14,6 +14,7 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor(staticName = "of")
 public class PostId {
 
+    // TODO: 2020/8/28 zjl figure out why here must be an Id annotation
     @Id
     Object value;
 

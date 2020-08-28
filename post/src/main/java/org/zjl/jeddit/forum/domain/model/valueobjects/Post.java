@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 /**
  * Used as a reference.
@@ -19,7 +18,6 @@ import org.springframework.data.annotation.Id;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Post {
 
-    @Id
     PostId id;
 
     @JsonCreator
