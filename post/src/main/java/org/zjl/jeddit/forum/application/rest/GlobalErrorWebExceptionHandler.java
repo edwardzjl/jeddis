@@ -19,8 +19,8 @@ import java.util.Map;
 /**
  * @author Junlin Zhou
  */
-@Order(-2)
-@Component
+//@Order(-2)
+//@Component
 public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHandler {
 
     public GlobalErrorWebExceptionHandler(ErrorAttributes errorAttributes, ResourceProperties resourceProperties,
