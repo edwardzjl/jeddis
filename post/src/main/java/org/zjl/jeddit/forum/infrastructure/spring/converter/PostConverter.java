@@ -4,6 +4,10 @@ import org.springframework.core.convert.converter.Converter;
 import org.zjl.jeddit.forum.domain.model.valueobjects.Post;
 
 /**
+ * Convert a Post value object (reply) to its id.
+ * <p>
+ * We save only the reference instead of the whole reply in the Post aggregate.
+ * <p>
  * R2dbc does not support nested objects (as expected), so we have to convert them before persist.
  *
  * @author Junlin Zhou
