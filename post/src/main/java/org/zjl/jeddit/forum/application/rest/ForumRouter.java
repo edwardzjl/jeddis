@@ -6,8 +6,10 @@ import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.zjl.jeddit.forum.application.ForumCommandHandler;
-import org.zjl.jeddit.forum.application.ForumQueryHandler;
+import org.zjl.jeddit.forum.application.MongoCommandHandler;
+import org.zjl.jeddit.forum.application.MongoQueryHandler;
+import org.zjl.jeddit.forum.application.PostgCommandHandler;
+import org.zjl.jeddit.forum.application.PostgQueryHandler;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.path;
 
@@ -18,39 +20,39 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 public class ForumRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> mongoQueryRoute(ForumQueryHandler queryHandler) {
+    public RouterFunction<ServerResponse> mongoQueryRoute(MongoQueryHandler queryHandler) {
         return RouterFunctions
                 .nest(path("/api/posts/mongo"),
                         RouterFunctions
-                                .route(RequestPredicates.GET("/"), queryHandler::getTopicsOnMongo)
-                                .andRoute(RequestPredicates.GET("/{id}"), queryHandler::getTopicOnMongo));
+                                .route(RequestPredicates.GET("/"), queryHandler::getTopics)
+                                .andRoute(RequestPredicates.GET("/{id}"), queryHandler::getTopic));
     }
 
     @Bean
-    public RouterFunction<ServerResponse> postgQueryRoute(ForumQueryHandler queryHandler) {
+    public RouterFunction<ServerResponse> postgQueryRoute(PostgQueryHandler queryHandler) {
         return RouterFunctions
                 .nest(path("/api/posts/postg"),
                         RouterFunctions
-                                .route(RequestPredicates.GET("/"), queryHandler::getTopicsOnPostg)
-                                .andRoute(RequestPredicates.GET("/{id}"), queryHandler::getTopicOnPostg));
+                                .route(RequestPredicates.GET("/"), queryHandler::getTopics)
+                                .andRoute(RequestPredicates.GET("/{id}"), queryHandler::getTopic));
     }
 
     @Bean
-    public RouterFunction<ServerResponse> mongoCommandRoute(ForumCommandHandler commandHandler) {
+    public RouterFunction<ServerResponse> mongoCommandRoute(MongoCommandHandler commandHandler) {
         return RouterFunctions
                 .nest(path("/api/posts/mongo"),
                         RouterFunctions
-                                .route(RequestPredicates.POST("/"), commandHandler::createPostOnMongo)
-                                .andRoute(RequestPredicates.PUT("/{id}"), commandHandler::updatePostOnMongo));
+                                .route(RequestPredicates.POST("/"), commandHandler::create)
+                                .andRoute(RequestPredicates.PUT("/{id}"), commandHandler::update));
     }
 
     @Bean
-    public RouterFunction<ServerResponse> postgCommandRoute(ForumCommandHandler commandHandler) {
+    public RouterFunction<ServerResponse> postgCommandRoute(PostgCommandHandler commandHandler) {
         return RouterFunctions
                 .nest(path("/api/posts/postg"),
                         RouterFunctions
-                                .route(RequestPredicates.POST("/"), commandHandler::createPostOnPostg)
-                                .andRoute(RequestPredicates.PUT("/{id}"), commandHandler::updateOnPostg));
+                                .route(RequestPredicates.POST("/"), commandHandler::create)
+                                .andRoute(RequestPredicates.PUT("/{id}"), commandHandler::update));
     }
 
 }
