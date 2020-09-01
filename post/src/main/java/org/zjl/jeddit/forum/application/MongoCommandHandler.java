@@ -25,12 +25,15 @@ public class MongoCommandHandler {
     private final PostRepository postRepo;
     private final PostMapper postMapper;
 
+    /**
+     * Create a new Post
+     */
     public Mono<ServerResponse> create(ServerRequest request) {
         return request.bodyToMono(CreatePostCommand.class)
                 .log()
                 .map(postMapper::create)
                 .map(postRepo::save)
-                .flatMap(monoPost -> monoPost)
+                .flatMap(monoPost -> monoPost) // unwrap Mono<Mono<Post>> to Mono<Post>
                 .flatMap(post -> {
                     URI location = UriComponentsBuilder
                             .fromUri(request.uri())
@@ -43,6 +46,9 @@ public class MongoCommandHandler {
                 });
     }
 
+    /**
+     * Update an existing Post
+     */
     public Mono<ServerResponse> update(ServerRequest request) {
         return request.bodyToMono(UpdatePostCommand.class)
                 .log()

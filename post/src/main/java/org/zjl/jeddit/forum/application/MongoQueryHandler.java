@@ -19,13 +19,19 @@ public class MongoQueryHandler {
 
     private final PostRepository postRepo;
 
-    public Mono<ServerResponse> getTopics(ServerRequest request) {
+    /**
+     * Get all posts
+     */
+    public Mono<ServerResponse> getPosts(ServerRequest request) {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_STREAM_JSON)
                 .body(postRepo.findAllInMongo(), Post.class);
     }
 
-    public Mono<ServerResponse> getTopic(ServerRequest request) {
+    /**
+     * Get a specific Post with a given id
+     */
+    public Mono<ServerResponse> getPost(ServerRequest request) {
         return postRepo.findByIdOnMongo(request.pathVariable("id"))
                 .flatMap(p -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)

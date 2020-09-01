@@ -24,8 +24,8 @@ public class ForumRouter {
         return RouterFunctions
                 .nest(path("/api/posts/mongo"),
                         RouterFunctions
-                                .route(RequestPredicates.GET("/"), queryHandler::getTopics)
-                                .andRoute(RequestPredicates.GET("/{id}"), queryHandler::getTopic));
+                                .route(RequestPredicates.GET("/"), queryHandler::getPosts)
+                                .andRoute(RequestPredicates.GET("/{id}"), queryHandler::getPost));
     }
 
     @Bean
