@@ -6,6 +6,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.zjl.jeddit.forum.application.commands.CreatePostCommand;
 import org.zjl.jeddit.forum.application.commands.UpdatePostCommand;
+import org.zjl.jeddit.forum.domain.model.aggregates.Draft;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
 import org.zjl.jeddit.forum.domain.model.valueobjects.PostId;
 
@@ -16,6 +17,8 @@ import org.zjl.jeddit.forum.domain.model.valueobjects.PostId;
 public interface PostMapper {
 
     Post create(CreatePostCommand command);
+
+    Post createFromDraft(Draft draft);
 
     @Mappings({
             @Mapping(target = "id", ignore = true)
