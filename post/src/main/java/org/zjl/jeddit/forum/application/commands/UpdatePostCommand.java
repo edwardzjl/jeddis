@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
+
 /**
  * @author Junlin Zhou
  */
@@ -13,9 +15,11 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdatePostCommand {
 
+    @Nullable
     @JsonProperty
     private String title;
 
+    @Nullable
     @JsonProperty
     private String content;
 

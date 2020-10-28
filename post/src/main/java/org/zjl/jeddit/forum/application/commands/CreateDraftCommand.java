@@ -24,6 +24,7 @@ public class CreateDraftCommand {
     @JsonProperty
     private User author;
 
+    @Nullable
     @JsonProperty
     private Post replyTo;
 

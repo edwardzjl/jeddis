@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.zjl.jeddit.forum.domain.model.valueobjects.Post;
 import org.zjl.jeddit.forum.domain.model.valueobjects.User;
 
+import javax.annotation.Nullable;
+
 /**
  * @author Junlin Zhou
  */
@@ -18,6 +20,7 @@ public class CreatePostCommand {
     @JsonProperty
     private User author;
 
+    @Nullable
     @JsonProperty
     private Post replyTo;
 
