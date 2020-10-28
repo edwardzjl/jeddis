@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 /**
  * Used as a reference.
  *
@@ -18,22 +20,22 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Post {
 
-    PostId id;
+    UUID id;
 
     @JsonCreator
-    public static Post of(Object id) {
-        PostId _id = PostId.of(id);
-        return new Post(_id);
+    public static Post of(UUID id) {
+//        PostId _id = PostId.of(id);
+        return new Post(id);
     }
 
-    @JsonIgnore
-    public Long getLongId() {
-        return id.getLongId();
-    }
+//    @JsonIgnore
+//    public Long getLongId() {
+//        return id.getLongId();
+//    }
 
-    @JsonIgnore
-    public String getStringId() {
-        return id.getStringId();
-    }
+//    @JsonIgnore
+//    public String getStringId() {
+//        return id.getStringId();
+//    }
 
 }

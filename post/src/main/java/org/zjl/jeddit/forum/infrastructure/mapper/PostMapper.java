@@ -29,17 +29,17 @@ public interface PostMapper {
 
     org.zjl.jeddit.forum.infrastructure.repository.mongo.Post modelToMongoEntity(Post model);
 
-    default PostId toModelId(String entityId) {
-        if (entityId == null) {
-            return null;
-        }
-        return PostId.of(entityId);
-    }
-
-    default String toEntityId(PostId modelId) {
-        if (modelId == null) {
-            return null;
-        }
-        return modelId.getStringId();
-    }
+//    default PostId toModelId(String entityId) {
+//        if (entityId == null) {
+//            return null;
+//        }
+//        return PostId.of(entityId);
+//    }
+//
+//    default String toEntityId(PostId modelId) {
+//        if (modelId == null) {
+//            return null;
+//        }
+//        return modelId.getStringId();
+//    }
 }

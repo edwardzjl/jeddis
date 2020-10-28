@@ -8,10 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.zjl.jeddit.forum.domain.model.valueobjects.User;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author Junlin Zhou
  */
+@Deprecated
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +22,7 @@ import java.util.Date;
 public class Post {
 
     @Id
-    private String id;
+    private UUID id;
 
     private User author;
 

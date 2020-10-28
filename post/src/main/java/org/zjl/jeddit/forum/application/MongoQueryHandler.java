@@ -10,6 +10,8 @@ import org.zjl.jeddit.forum.domain.model.aggregates.Post;
 import org.zjl.jeddit.forum.domain.model.aggregates.PostRepository;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 /**
  * @author Junlin Zhou
  */
@@ -32,7 +34,7 @@ public class MongoQueryHandler {
      * Get a specific Post with a given id
      */
     public Mono<ServerResponse> getPost(ServerRequest request) {
-        return postRepo.findByIdOnMongo(request.pathVariable("id"))
+        return postRepo.findByIdOnMongo(UUID.fromString(request.pathVariable("id")))
                 .flatMap(p -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)
                         .body(BodyInserters.fromValue(p)))

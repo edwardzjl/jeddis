@@ -2,29 +2,28 @@ package org.zjl.jeddit.forum.domain.model.aggregates;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.zjl.jeddit.forum.domain.model.valueobjects.PostId;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.zjl.jeddit.forum.domain.model.valueobjects.User;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 /**
  * @author Junlin Zhou
  */
+@Document
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
 
-    /**
-     * Nullable when creating
-     */
-    @Nullable
     @Id
     @JsonProperty
-    private PostId id;
+    private UUID id;
 
     @JsonProperty
     private User author;
@@ -39,15 +38,9 @@ public class Post {
     @JsonProperty
     private String content;
 
-    /*
-    TODO: 2020/8/26 zjl replace NoArgsConstructor and AllArgsConstructor with this specific constructor
-    support for parametrized constructor is not supported in current version (1.3.1), and will be supported in 1.4.0
-    See https://github.com/mapstruct/mapstruct/issues/73
-    Once updated, omit the NoArgsConstructor, and use following constructor
-    */
-
-//    public Post(User author, Post replyTo, String title, String content) {
-//        this(null, author, replyTo, title, content);
-//    }
+    @Builder
+    public Post(User author, org.zjl.jeddit.forum.domain.model.valueobjects.Post replyTo, String title, String content) {
+        this(UUID.randomUUID(), author, replyTo, title, content);
+    }
 
 }

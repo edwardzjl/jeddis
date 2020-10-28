@@ -6,6 +6,8 @@ import org.springframework.data.r2dbc.mapping.OutboundRow;
 import org.springframework.data.r2dbc.mapping.SettableValue;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
 
+import java.util.UUID;
+
 /**
  * @author Junlin Zhou
  */
@@ -16,11 +18,11 @@ public class PostWriteConverter implements Converter<Post, OutboundRow> {
     public OutboundRow convert(Post source) {
         OutboundRow row = new OutboundRow();
         if (source.getId() != null) {
-            row.put("id", SettableValue.fromOrEmpty(source.getId().getLongId(), Long.class));
+            row.put("id", SettableValue.fromOrEmpty(source.getId(), UUID.class));
         }
-        row.put("author", SettableValue.fromOrEmpty(source.getAuthor().getId(), Long.class));
+        row.put("author", SettableValue.fromOrEmpty(source.getAuthor().getId(), UUID.class));
         if (source.getReplyTo() != null) {
-            row.put("reply_to", SettableValue.fromOrEmpty(source.getReplyTo().getLongId(), Long.class));
+            row.put("reply_to", SettableValue.fromOrEmpty(source.getReplyTo().getId(), UUID.class));
         }
         row.put("title", SettableValue.from(source.getTitle()));
         row.put("content", SettableValue.from(source.getContent()));

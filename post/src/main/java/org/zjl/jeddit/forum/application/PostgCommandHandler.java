@@ -14,6 +14,7 @@ import org.zjl.jeddit.forum.infrastructure.mapper.PostMapper;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.UUID;
 
 /**
  * @author Junlin Zhou
@@ -40,7 +41,7 @@ public class PostgCommandHandler {
     }
 
     public Mono<ServerResponse> update(ServerRequest request) {
-        Long id = Long.valueOf(request.pathVariable("id"));
+        UUID id = UUID.fromString(request.pathVariable("id"));
         return request.bodyToMono(UpdatePostCommand.class)
                 .log()
                 .zipWith(

@@ -10,6 +10,8 @@ import org.zjl.jeddit.forum.domain.model.aggregates.Post;
 import org.zjl.jeddit.forum.domain.model.aggregates.PostRepository;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 /**
  * @author Junlin Zhou
  */
@@ -26,7 +28,7 @@ public class PostgQueryHandler {
     }
 
     public Mono<ServerResponse> getTopic(ServerRequest request) {
-        return postRepo.findByIdOnPostg(Long.valueOf(request.pathVariable("id")))
+        return postRepo.findByIdOnPostg(UUID.fromString(request.pathVariable("id")))
                 .flatMap(p -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_STREAM_JSON)
                         .body(BodyInserters.fromValue(p)))

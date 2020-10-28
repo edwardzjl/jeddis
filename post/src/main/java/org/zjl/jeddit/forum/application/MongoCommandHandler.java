@@ -14,6 +14,7 @@ import org.zjl.jeddit.forum.infrastructure.mapper.PostMapper;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.UUID;
 
 /**
  * @author Junlin Zhou
@@ -37,7 +38,7 @@ public class MongoCommandHandler {
                 .flatMap(post -> {
                     URI location = UriComponentsBuilder
                             .fromUri(request.uri())
-                            .pathSegment(post.getId().getStringId())
+                            .pathSegment(post.getId().toString())
                             .build()
                             .toUri();
                     return ServerResponse.created(location)
@@ -53,7 +54,7 @@ public class MongoCommandHandler {
         return request.bodyToMono(UpdatePostCommand.class)
                 .log()
                 .zipWith(
-                        postRepo.findByIdOnMongo(request.pathVariable("id")),
+                        postRepo.findByIdOnMongo(UUID.fromString(request.pathVariable("id"))),
                         postMapper::update
                 ).map(postRepo::save)
                 .flatMap(post -> ServerResponse.ok()

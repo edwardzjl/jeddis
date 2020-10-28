@@ -9,6 +9,7 @@ import lombok.Value;
  * We are using both postg and mongo in the same project,
  * where postg use {@code Long} for id, and mongo use {@code String}.
  */
+@Deprecated
 @Value
 @AllArgsConstructor(staticName = "of")
 public class PostId {
