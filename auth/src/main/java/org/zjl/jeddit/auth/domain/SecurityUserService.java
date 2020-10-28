@@ -24,21 +24,6 @@ public class SecurityUserService implements ReactiveUserDetailsService {
     /**
      * @param username openId from wechat
      */
-//    @Override
-//    public SecurityUser loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return securityUserRepo.findByUsername(username)
-//                .map(mapper::entityToModel)
-//                .orElseThrow(() -> new UsernameNotFoundException("No such user for name: " + username));
-//        if (!securityUser.isEnabled()) {
-//            throw new DisabledException(MessageConstant.ACCOUNT_DISABLED);
-//        } else if (!securityUser.isAccountNonLocked()) {
-//            throw new LockedException(MessageConstant.ACCOUNT_LOCKED);
-//        } else if (!securityUser.isAccountNonExpired()) {
-//            throw new AccountExpiredException(MessageConstant.ACCOUNT_EXPIRED);
-//        } else if (!securityUser.isCredentialsNonExpired()) {
-//            throw new CredentialsExpiredException(MessageConstant.CREDENTIALS_EXPIRED);
-//        }
-//    }
     @Override
     public Mono<UserDetails> findByUsername(String username) {
         return userRepo.findByUsername(username)
