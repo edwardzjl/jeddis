@@ -9,7 +9,7 @@ import org.zjl.jeddit.forum.infrastructure.repository.mongo.PostMongoRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.data.r2dbc.query.Criteria.where;
+import static org.springframework.data.relational.core.query.Criteria.where;
 
 /**
  * @author Junlin Zhou
