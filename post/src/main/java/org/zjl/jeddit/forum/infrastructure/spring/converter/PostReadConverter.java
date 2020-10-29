@@ -6,6 +6,7 @@ import org.springframework.data.convert.ReadingConverter;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
 import org.zjl.jeddit.forum.domain.model.valueobjects.User;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -31,9 +32,11 @@ public class PostReadConverter implements Converter<Row, Post> {
         }
 
         String title = source.get("title", String.class);
-
         String content = source.get("content", String.class);
 
-        return new Post(id, author, replyTo, title, content);
+        LocalDateTime createTime = source.get("create_time", LocalDateTime.class);
+        LocalDateTime updateTime = source.get("update_time", LocalDateTime.class);
+
+        return new Post(id, author, replyTo, title, content, createTime, updateTime);
     }
 }

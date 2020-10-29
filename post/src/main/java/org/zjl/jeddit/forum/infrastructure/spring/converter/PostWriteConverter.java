@@ -20,12 +20,14 @@ public class PostWriteConverter implements Converter<Post, OutboundRow> {
         if (source.getId() != null) {
             row.put("id", SettableValue.fromOrEmpty(source.getId(), UUID.class));
         }
-        row.put("author", SettableValue.fromOrEmpty(source.getAuthor().getId(), UUID.class));
+        row.put("author", SettableValue.from(source.getAuthor().getId()));
         if (source.getReplyTo() != null) {
             row.put("reply_to", SettableValue.fromOrEmpty(source.getReplyTo().getId(), UUID.class));
         }
         row.put("title", SettableValue.from(source.getTitle()));
         row.put("content", SettableValue.from(source.getContent()));
+        row.put("create_time", SettableValue.from(source.getCreateTime()));
+        row.put("update_time", SettableValue.from(source.getUpdateTime()));
         return row;
     }
 }
