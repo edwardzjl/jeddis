@@ -1,6 +1,5 @@
 package org.zjl.jeddit.forum.domain.model.aggregates;
 
-import lombok.AllArgsConstructor;
 import org.springframework.data.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Component;
 import org.zjl.jeddit.forum.infrastructure.mapper.PostMapper;
@@ -15,20 +14,20 @@ import static org.springframework.data.relational.core.query.Criteria.where;
 /**
  * @author Junlin Zhou
  */
-@AllArgsConstructor
 @Component
 public class PostRepository {
 
     private final PostMongoRepository postRepo;
-    private final PostMapper postMapper;
     private final DatabaseClient databaseClient;
+
+    public PostRepository(PostMongoRepository postRepo, PostMapper postMapper, DatabaseClient databaseClient) {
+        this.postRepo = postRepo;
+        this.databaseClient = databaseClient;
+    }
 
 
     public Mono<Post> save(Post entity) {
-//        org.zjl.jeddit.forum.infrastructure.repository.mongo.Post mongoEntity = postMapper.modelToMongoEntity(entity);
         return postRepo.save(entity);
-//                .log()
-//                .map(postMapper::mongoEntityToModel);
     }
 
     /**
@@ -38,13 +37,13 @@ public class PostRepository {
         return databaseClient.insert()
                 .into(Post.class)
                 .using(entity)
+                // return id of created post
                 .map(row -> row.get("id", UUID.class))
                 .one()
                 .map(Object::toString);
     }
 
     public Mono<Integer> updateOnPostg(UUID id, Post entity) {
-//        entity.setId(PostId.of(id));
         return databaseClient.update()
                 .table(Post.class)
                 .using(entity)
@@ -55,8 +54,6 @@ public class PostRepository {
 
     public Mono<Post> findByIdOnMongo(UUID id) {
         return postRepo.findById(id);
-//                .log()
-//                .map(postMapper::mongoEntityToModel);
     }
 
     public Mono<Post> findByIdOnPostg(UUID id) {
@@ -69,8 +66,6 @@ public class PostRepository {
 
     public Flux<Post> findAllInMongo() {
         return postRepo.findAll();
-//                .log()
-//                .map(postMapper::mongoEntityToModel);
     }
 
     public Flux<Post> findAllInPostg() {
