@@ -8,7 +8,6 @@ import org.zjl.jeddit.forum.application.commands.CreatePostCommand;
 import org.zjl.jeddit.forum.application.commands.UpdatePostCommand;
 import org.zjl.jeddit.forum.domain.model.aggregates.Draft;
 import org.zjl.jeddit.forum.domain.model.aggregates.Post;
-import org.zjl.jeddit.forum.domain.model.valueobjects.PostId;
 
 /**
  * @author Junlin Zhou
@@ -21,25 +20,12 @@ public interface PostMapper {
     Post createFromDraft(Draft draft);
 
     @Mappings({
-            @Mapping(target = "id", ignore = true)
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "author", ignore = true),
+            @Mapping(target = "replyTo", ignore = true),
+            @Mapping(target = "createTime", ignore = true),
+            @Mapping(target = "updateTime", ignore = true)
     })
     Post update(UpdatePostCommand command, @MappingTarget Post target);
 
-    Post mongoEntityToModel(org.zjl.jeddit.forum.infrastructure.repository.mongo.Post entity);
-
-    org.zjl.jeddit.forum.infrastructure.repository.mongo.Post modelToMongoEntity(Post model);
-
-//    default PostId toModelId(String entityId) {
-//        if (entityId == null) {
-//            return null;
-//        }
-//        return PostId.of(entityId);
-//    }
-//
-//    default String toEntityId(PostId modelId) {
-//        if (modelId == null) {
-//            return null;
-//        }
-//        return modelId.getStringId();
-//    }
 }
